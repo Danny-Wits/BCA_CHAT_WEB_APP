@@ -42,6 +42,13 @@ export function Login() {
     queryClient.invalidateQueries(["isAuth"]);
   };
   const signup = async () => {
+    if (!email || !password) {
+      notifications.show({
+        message: "Please enter email and password",
+        color: "red",
+      });
+      return;
+    }
     const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
