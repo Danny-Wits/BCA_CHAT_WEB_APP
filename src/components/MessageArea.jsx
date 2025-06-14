@@ -35,24 +35,18 @@ function MessageArea() {
     <Stack justify="space-between" h={"80vh"}>
       <Messages />
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          sendMessage();
-        }}
-      >
-        <TextInput
-          value={messages}
-          component={"textarea"}
-          onChange={(e) => setMessages(e.target.value)}
-          placeholder="Type a Message"
-          rightSection={
-            <ActionIcon onClick={sendMessage} loading={isPending}>
-              <IoSend />
-            </ActionIcon>
-          }
-        ></TextInput>
-      </form>
+      <TextInput
+        size="lg"
+        value={messages}
+        component={"textarea"}
+        onChange={(e) => setMessages(e.target.value)}
+        placeholder="Type a Message"
+        rightSection={
+          <ActionIcon onClick={sendMessage} loading={isPending}>
+            <IoSend />
+          </ActionIcon>
+        }
+      ></TextInput>
     </Stack>
   );
 }
