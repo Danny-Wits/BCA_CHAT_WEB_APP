@@ -32,11 +32,7 @@ function MessageArea() {
   }
 
   return (
-    <Stack
-      justify="space-between"
-      h={"85vh"}
-    
-    >
+    <Stack justify="space-between" h={"80vh"}>
       <Messages />
 
       <form

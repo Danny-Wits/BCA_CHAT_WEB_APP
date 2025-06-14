@@ -16,7 +16,7 @@ export default function Message({ user, text, time }) {
       <Group>
         <Avatar name={user} color="initials" radius="xl" />
         <div>
-          <Text size="sm" fw={500} c={"dimmed"}>
+          <Text size="sm" fw={600} c={"dimmed"}>
             {user}
           </Text>
           <Text size="xs" c="dimmed">

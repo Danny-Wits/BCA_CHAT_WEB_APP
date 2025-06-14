@@ -49,7 +49,7 @@ function Messages() {
     );
   }
   return (
-    <ScrollArea h={"70vh"} viewportRef={viewport} py={"sm"}>
+    <ScrollArea h={"60vh"} viewportRef={viewport} py={"sm"}>
       <Stack>
         {Array.from(messages).map((message) => {
           return (

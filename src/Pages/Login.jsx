@@ -80,7 +80,7 @@ export function Login() {
         <Text ta="center" mt="md">
           Don&apos;t have an account?{" "}
           <Anchor href="#" fw={500} onClick={(event) => event.preventDefault()}>
-            Womp Womp 😏😏
+            Womp Womp 😏
           </Anchor>
         </Text>
       </Paper>
