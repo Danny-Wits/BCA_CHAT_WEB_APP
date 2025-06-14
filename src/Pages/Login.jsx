@@ -2,6 +2,7 @@ import {
   Anchor,
   Button,
   Checkbox,
+  Group,
   Paper,
   PasswordInput,
   Text,
@@ -40,6 +41,20 @@ export function Login() {
     });
     queryClient.invalidateQueries(["isAuth"]);
   };
+  const signup = async () => {
+    const { error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+    if (error) {
+      notifications.show({
+        message: error.message,
+        color: "red",
+      });
+      return;
+    }
+    queryClient.invalidateQueries(["isAuth"]);
+  };
   return (
     <div className={classes.wrapper}>
       <Paper className={classes.form}>
@@ -73,14 +88,33 @@ export function Login() {
           onChange={(event) => setPassword(event.target.value)}
         />
         <Checkbox label="Keep me logged in" mt="xl" size="md" />
-        <Button fullWidth mt="xl" size="md" radius="md" onClick={authenticate}>
-          Login
-        </Button>
+
+        <Group justify="space-around">
+          <Button
+            w={"40%"}
+            mt="xl"
+            size="md"
+            radius="md"
+            onClick={authenticate}
+          >
+            Login
+          </Button>
+          <Button
+            w={"40%"}
+            mt="xl"
+            size="md"
+            radius="md"
+            onClick={signup}
+            variant="light"
+          >
+            SignUp
+          </Button>
+        </Group>
 
         <Text ta="center" mt="md">
           Don&apos;t have an account?{" "}
           <Anchor href="#" fw={500} onClick={(event) => event.preventDefault()}>
-            Womp Womp 😏
+            Use Sign up Button Above
           </Anchor>
         </Text>
       </Paper>
