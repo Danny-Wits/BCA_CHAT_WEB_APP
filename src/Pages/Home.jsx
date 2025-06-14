@@ -1,5 +1,4 @@
 import {
-  ActionIcon,
   AppShell,
   Avatar,
   Burger,
@@ -12,8 +11,8 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { CiLogout } from "react-icons/ci";
 import { logout } from "../App";
+import logo from "../assets/logo.png";
 import MessageArea from "../components/MessageArea";
-
 export function Home({ user }) {
   const [opened, { toggle }] = useDisclosure();
 
@@ -29,6 +28,7 @@ export function Home({ user }) {
     >
       <AppShell.Header>
         <Group h="100%" px="md" w={"100%"}>
+          <Avatar src={logo}></Avatar>
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
           <Title order={3} c={"cyan"}>
             BCA CHAT
@@ -39,12 +39,8 @@ export function Home({ user }) {
               <Button
                 size="xs"
                 onClick={logout}
-                leftSection={
-                  <ActionIcon>
-                    <CiLogout />
-                  </ActionIcon>
-                }
-                variant="subtle"
+                leftSection={<CiLogout />}
+                variant="light"
               >
                 Logout
               </Button>

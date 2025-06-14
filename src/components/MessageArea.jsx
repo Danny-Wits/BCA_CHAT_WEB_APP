@@ -1,4 +1,4 @@
-import { ActionIcon, ScrollArea, Stack, TextInput } from "@mantine/core";
+import { ActionIcon, Stack, TextInput } from "@mantine/core";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { IoSend } from "react-icons/io5";
@@ -30,11 +30,15 @@ function MessageArea() {
 
     if (error) return false;
   }
+
   return (
-    <Stack justify="space-between" h={"85vh"}>
-      <ScrollArea h={"70vh"}>
-        <Messages />
-      </ScrollArea>
+    <Stack
+      justify="space-between"
+      h={"85vh"}
+    
+    >
+      <Messages />
+
       <form
         onSubmit={(e) => {
           e.preventDefault();

@@ -6,7 +6,13 @@ import { Login } from "./Pages/Login";
 import supabase from "./supabase";
 function App() {
   const [messages, setMessages] = useState([]);
-  const { data: user } = useQuery({ queryKey: ["isAuth"], queryFn: isAuth });
+  const { data: user } = useQuery({
+    queryKey: ["isAuth"],
+    queryFn: isAuth,
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
+    retry: 2,
+  });
   if (!user) {
     return <Login></Login>;
   }

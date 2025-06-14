@@ -1,6 +1,6 @@
-import { Center, Loader, Stack } from "@mantine/core";
+import { Center, Loader, ScrollArea, Stack } from "@mantine/core";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import supabase from "../supabase";
 import Message from "./Message";
 
@@ -12,6 +12,14 @@ function Messages() {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
+  const viewport = useRef(null);
+  const scrollToBottom = () => {
+    viewport.current?.scrollTo({
+      top: viewport.current.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
   const queryClient = useQueryClient();
   useEffect(() => {
     const channels = supabase
@@ -21,6 +29,7 @@ function Messages() {
         { event: "INSERT", schema: "public", table: "text_message" },
         (payload) => {
           queryClient.invalidateQueries(["messages"]);
+          scrollToBottom();
         }
       )
       .subscribe();
@@ -28,6 +37,10 @@ function Messages() {
       channels.unsubscribe();
     };
   }, []);
+  useEffect(() => {
+    if (!messages) return;
+    scrollToBottom();
+  }, [messages]);
   if (!messages) {
     return (
       <Center>
@@ -36,18 +49,20 @@ function Messages() {
     );
   }
   return (
-    <Stack>
-      {Array.from(messages).map((message) => {
-        return (
-          <Message
-            user={message?.username}
-            text={message?.content}
-            time={message?.created_at}
-            key={message?.id}
-          ></Message>
-        );
-      })}
-    </Stack>
+    <ScrollArea h={"70vh"} viewportRef={viewport} py={"sm"}>
+      <Stack>
+        {Array.from(messages).map((message) => {
+          return (
+            <Message
+              user={message?.username}
+              text={message?.content}
+              time={message?.created_at}
+              key={message?.id}
+            ></Message>
+          );
+        })}
+      </Stack>
+    </ScrollArea>
   );
 }
 const getMessages = async () => {
