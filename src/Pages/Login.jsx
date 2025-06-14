@@ -121,7 +121,7 @@ export function Login() {
         <Text ta="center" mt="md">
           Don&apos;t have an account?{" "}
           <Anchor href="#" fw={500} onClick={(event) => event.preventDefault()}>
-            Use Sign up Button Above
+            Use Sign up
           </Anchor>
         </Text>
       </Paper>
